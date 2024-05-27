@@ -19,4 +19,5 @@ Backend: firebase
 PC
 
 ![모바일버전](https://github.com/yoonhyoyeon/hyoyeon-chatapp/assets/30565205/5b6dc75a-0bf1-4ff1-a649-185d24c765a7)
+
 모바일
