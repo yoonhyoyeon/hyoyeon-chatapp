@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script rel="javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+    <!-- Add additional services you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-messaging.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+    <script rel="javascript" src="./source/js/main.js"></script>
+    <link rel="stylesheet" href="./source/css/style.css">
+    <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{your-app-id}',
+      cookie     : true,
+      xfbml      : true,
+      version    : '{api-version}'
+    });
+
+    FB.AppEvents.logPageView();
+
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+    <title>ChatApp</title>
+  </head>
+  <body>
+    <!-- 체크 -->
+    <div class="signin-email check hidden">
+      <div class="firebaseui-card-header">
+        <h1 class="firebaseui-title">Sign in with email</h1>
+      </div>
+      <div class="firebaseui-card-content">
+        <div class="firebaseui-relative-wrapper">
+          <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded" data-upgraded=",MaterialTextfield">
+            <label class="mdl-textfield__label firebaseui-label" for="email">Email</label>
+            <input type="email" id="email" autocomplete="username" class="mdl-textfield__input firebaseui-input firebaseui-id-email" value="">
+          </div>
+          <div class="firebaseui-error-wrapper">
+            <p class="firebaseui-error firebaseui-text-input-error firebaseui-hidden firebaseui-id-email-error"></p>
+          </div>
+        </div>
+      </div>
+      <div class="firebaseui-card-actions">
+        <div class="firebaseui-form-actions">
+          <button id="close" class="firebaseui-id-secondary-link firebaseui-button mdl-button mdl-js-button mdl-button--primary" data-upgraded=",MaterialButton">Cancel</button>
+          <button id='next' type="submit" class="firebaseui-id-submit firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored" data-upgraded=",MaterialButton">Next</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 로그인 -->
+    <div class="signin-email signin hidden">
+      <div class="firebaseui-card-header">
+        <h1 class="firebaseui-title">Sign in</h1>
+      </div>
+      <div class="firebaseui-card-content">
+        <div class="firebaseui-relative-wrapper">
+          <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded" data-upgraded=",MaterialTextfield">
+            <label class="mdl-textfield__label firebaseui-label" for="password">Password</label>
+            <input type="password" id="password" autocomplete="username" class="mdl-textfield__input firebaseui-input firebaseui-id-email" value="">
+          </div>
+          <div class="firebaseui-error-wrapper">
+            <p class="firebaseui-error firebaseui-text-input-error firebaseui-hidden firebaseui-id-email-error"></p>
+          </div>
+        </div>
+      </div>
+      <div class="firebaseui-card-actions">
+        <div class="firebaseui-form-actions">
+          <button id="close" class="firebaseui-id-secondary-link firebaseui-button mdl-button mdl-js-button mdl-button--primary" data-upgraded=",MaterialButton">Cancel</button>
+          <button id='next' type="submit" class="firebaseui-id-submit firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored" data-upgraded=",MaterialButton">Sign in</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 회원가입 -->
+    <div class="signin-email signup hidden">
+      <div class="firebaseui-card-header">
+        <h1 class="firebaseui-title">Sign up</h1>
+      </div>
+      <div class="firebaseui-card-content">
+        <div class="firebaseui-relative-wrapper">
+          <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded" data-upgraded=",MaterialTextfield">
+            <label class="mdl-textfield__label firebaseui-label" for="password">Name</label>
+            <input type="text" id="name" autocomplete="username" class="mdl-textfield__input firebaseui-input firebaseui-id-email" value="">
+          </div>
+          <div class="firebaseui-error-wrapper">
+            <p class="firebaseui-error firebaseui-text-input-error firebaseui-hidden firebaseui-id-email-error"></p>
+          </div>
+        </div>
+        <div class="firebaseui-relative-wrapper">
+          <div class="firebaseui-textfield mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded" data-upgraded=",MaterialTextfield">
+            <label class="mdl-textfield__label firebaseui-label" for="password">Password</label>
+            <input type="password" id="password" autocomplete="username" class="mdl-textfield__input firebaseui-input firebaseui-id-email" value="">
+          </div>
+          <div class="firebaseui-error-wrapper">
+            <p class="firebaseui-error firebaseui-text-input-error firebaseui-hidden firebaseui-id-email-error"></p>
+          </div>
+        </div>
+      </div>
+      <div class="firebaseui-card-actions">
+        <div class="firebaseui-form-actions">
+          <button id="close" class="firebaseui-id-secondary-link firebaseui-button mdl-button mdl-js-button mdl-button--primary" data-upgraded=",MaterialButton">Cancel</button>
+          <button id='next' type="submit" class="firebaseui-id-submit firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored" data-upgraded=",MaterialButton">Sign up</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="signin-popup hidden">
+      <span id="close"><i class="fas fa-times"></i></span>
+      <div class="firebaseui-card-content">
+        <form onsubmit="return false;">
+          <ul class="firebaseui-idp-list">
+            <!--Google-->
+            <li class="firebaseui-list-item">
+              <button class="firebaseui-idp-button mdl-button mdl-js-button mdl-button--raised firebaseui-idp-google firebaseui-id-idp-button" data-provider-id="google.com" data-upgraded=",MaterialButton">
+                <span class="firebaseui-idp-icon-wrapper">
+                  <img class="firebaseui-idp-icon" alt="" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
+                </span>
+                <span class="firebaseui-idp-text firebaseui-idp-text-long">Sign in with Google</span>
+                <span class="firebaseui-idp-text firebaseui-idp-text-short">Google</span>
+              </button>
+            </li>
+            <!--Facebook-->
+            <li class="firebaseui-list-item">
+              <button class="firebaseui-idp-button mdl-button mdl-js-button mdl-button--raised firebaseui-idp-facebook firebaseui-id-idp-button" data-provider-id="facebook.com" data-upgraded=",MaterialButton">
+                <span class="firebaseui-idp-icon-wrapper">
+                  <img class="firebaseui-idp-icon" alt="" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/facebook.svg">
+                </span>
+                <span class="firebaseui-idp-text firebaseui-idp-text-long">Sign in with Facebook</span>
+                <span class="firebaseui-idp-text firebaseui-idp-text-short">Facebook</span>
+              </button>
+            </li>
+            <!--Email-->
+            <li class="firebaseui-list-item">
+              <button class="firebaseui-idp-button mdl-button mdl-js-button mdl-button--raised firebaseui-idp-password firebaseui-id-idp-button" data-provider-id="password" data-upgraded=",MaterialButton">
+                <span class="firebaseui-idp-icon-wrapper">
+                  <img class="firebaseui-idp-icon" alt="" src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/mail.svg">
+                </span>
+                <span class="firebaseui-idp-text firebaseui-idp-text-long">Sign in with email</span>
+                <span class="firebaseui-idp-text firebaseui-idp-text-short">Email</span>
+              </button>
+            </li>
+          </ul>
+        </form>
+      </div>
+    </div>
+
+    <!-- left -->
+    <div class="left-box">
+
+      <!-- top -->
+      <div class="header">
+        <div class="login-true hidden">
+          <a id="logout" class="btn"><i class="fas fa-door-open"></i> 로그아웃</a>
+          <span><span class="name"></span> 님 안녕하세요</span>
+        </div>
+        <div class="login-false hidden">
+          <a id="login" class="btn"><i class="fas fa-sign-in-alt"></i> 로그인</a>
+          <span>로그인 해주세요</span>
+        </div>
+      </div>
+
+      <!-- middle -->
+      <div class="contents-box">
+        <!-- home -->
+        <div class="home">
+          <div class="rooms-list">
+
+            <!-- Load_rooms -->
+
+          </div>
+        </div>
+
+        <!-- contact -->
+        <div class="contact hidden">
+          <div class="users-list">
+            <div class="user active">
+              <div class="profile-img" style="background:url(./source/img/profile-img.jpg); background-position:center; background-size:cover;"></div>
+              <span class="name">윤효연</span>
+              <i class="fas fa-angle-right"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- search -->
+        <div class="search hidden">
+          <div class="search-box">
+            <input id="search_user" placeholder="검색" type="text">
+          </div>
+          <div class="users-list">
+
+            <!-- Searched_Users -->
+
+          </div>
+        </div>
+      </div>
+
+      <!-- bottom -->
+      <div class="bottom">
+        <div id="home" class="btn active">
+          <i class="far fa-clock"></i>
+          <span>홈</span>
+        </div>
+        <div id="search" class="btn">
+          <i class="fas fa-search"></i>
+          <span>검색</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right-box -->
+    <div class="right-box">
+
+      <!-- top -->
+      <div class="header">
+        <div class="title">
+          <p class="name"></p>
+          <span class="last_online"></span>
+        </div>
+        <span id="back" class="btn"><i class="fas fa-angle-left"></i> 돌아가기</span>
+      </div>
+
+      <!-- middle -->
+      <div class="contents-box">
+
+      </div>
+
+      <!-- bottom -->
+      <div class="bottom">
+        <input placeholder="Aa" id="message" class="message-box" type="text">
+        <button class="submit-btn"><i class="fas fa-paper-plane"></i></button>
+      </div>
+
+    </div>
+
+    <script>
+    function slide_in() {
+      if($(window).width()<=700 && now_user!=0)  {
+        $('.left-box').css('width','0');
+        $('.left-box .bottom').css('width','0');
+        $('.left-box .contents-box').css('width','0');
+      }
+    }
+    </script>
+  </body>
+</html>
