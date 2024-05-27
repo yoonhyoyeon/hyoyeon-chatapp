@@ -16,8 +16,8 @@ Backend: firebase
 * 실시간 채팅
 
 ## 이미지
-![image](https://github.com/yoonhyoyeon/hyoyeon-chatapp/assets/30565205/b94d045d-b69e-4e00-b954-da905aa93683)
-PC버전
+![PC버전](https://github.com/yoonhyoyeon/hyoyeon-chatapp/assets/30565205/b94d045d-b69e-4e00-b954-da905aa93683)
 
-![image](https://github.com/yoonhyoyeon/hyoyeon-chatapp/assets/30565205/5b6dc75a-0bf1-4ff1-a649-185d24c765a7)
-모바일버전
+
+![모바일버전](https://github.com/yoonhyoyeon/hyoyeon-chatapp/assets/30565205/5b6dc75a-0bf1-4ff1-a649-185d24c765a7)
+
