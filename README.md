@@ -5,6 +5,8 @@ Frontend: jQuery
 
 Backend: firebase
 
+design: facebook messanger 디자인 참고
+
 2018.09.20 개발
 
 ## 기능
