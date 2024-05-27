@@ -1,6 +1,6 @@
 # hyoyeon-chatapp
 
-URL : hyoyeon-chatapp.firebaseapp.com
+URL : [hyoyeon-chatapp.firebaseapp.com](https://hyoyeon-chatapp.firebaseapp.com/)
 
 Frontend: jQuery
 Backend: firebase
