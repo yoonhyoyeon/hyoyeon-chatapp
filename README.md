@@ -6,7 +6,7 @@ jQuery
 ### Backend
 Firebase
 ### Design
-Facebook Messenger 디자인을 참고해 개발함.
+Facebook Messenger 디자인 참고
 
 ### 개발 일시
 2018.09.20 개발
